@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//Now we consider the situation when threshold=0
 public class TwoQueue {
     public static void main(String[] args) {
 
@@ -168,7 +168,7 @@ public class TwoQueue {
         loop:while (Time<originalTime) {
 
 
-            if (RQI < threshold) {
+            if (RQI <= threshold) {
                 for (int i = 0; i < jobs1.length; i++) {
                     if ((jobs1[i].jobArrivalTime <= Time) &&
                             jobServiceTime1[i] > 0) {
@@ -246,7 +246,7 @@ public class TwoQueue {
             } else{
                 currentRequest=requestQueueInfo(request2,requestServiceTime2, Time)[0];
 
-                while (RQI>0){
+                while (RQI>=0){
 
                     Time = Time + requestServiceTime2[currentRequest];
                     requestServiceTime2[currentRequest]=-1;
