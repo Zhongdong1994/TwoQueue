@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 //Now we consider the situation when threshold=0
+//This code is correct now, the second output is jobAvgSystemTime, the fifth output is requestAvgSystemTime
 public class TwoQueue {
     public static void main(String[] args) {
 
@@ -24,11 +25,11 @@ public class TwoQueue {
     {
 
 
-        double Time=20000;
-        int threshold=1;
+        double Time=1000;
+        int threshold=0;
         double timeInterval=0.001;
 
-        double jobArrivalRate=1, jobServiceRate=2,requestArrivalRate=1,requestServiceRate=3;
+        double jobArrivalRate=1, jobServiceRate=3,requestArrivalRate=1,requestServiceRate=3;
         ArrayList<Integer> jobIndex=new ArrayList<>(); ArrayList<Double> jobServiceTime=new ArrayList<>();ArrayList<Double> jobBeginTime=new ArrayList<>();
         ArrayList<Integer> requestIndex=new ArrayList<>(); ArrayList<Double> requestServiceTime=new ArrayList<>();ArrayList<Double> requestBeginTime=new ArrayList<>();
         AddJobs.addJobs1(jobArrivalRate,jobServiceRate,jobIndex,jobBeginTime,jobServiceTime,Time);
@@ -185,7 +186,7 @@ public class TwoQueue {
                         currentRequest=requestQueueInfo(request2,requestServiceTime2, Time)[0];
                         if(currentRequest<request2.length){
                             RQI = requestQueueInfo(request2,requestServiceTime2, Time)[2];
-                            if(RQI >= threshold){
+                            if(RQI > threshold){
                                 continue loop;
                             }else {
                                 jobServiceTime1[currentJob]=jobServiceTime1[currentJob]-timeInterval;
@@ -246,7 +247,7 @@ public class TwoQueue {
             } else{
                 currentRequest=requestQueueInfo(request2,requestServiceTime2, Time)[0];
 
-                while (RQI>=0){
+                while (RQI>0){
 
                     Time = Time + requestServiceTime2[currentRequest];
                     requestServiceTime2[currentRequest]=-1;
